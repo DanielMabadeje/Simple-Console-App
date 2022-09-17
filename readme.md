@@ -1,3 +1,13 @@
+
+## Installation
+
+After Pulling the code from Github
+
+Change Directory to Folder
+
+Run ``` composer install ```
+
+
 To ensure your the demo file is executable
 chmod +x bin/demo
 
