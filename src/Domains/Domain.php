@@ -47,8 +47,6 @@ class Domain
     public function post()
     {
 
-        // var_dump($this->params);
-        // die;
         $client=new Client();
         try{
             $response = $client->request('POST', $this->generateEndpoint(), [
@@ -59,8 +57,7 @@ class Domain
                     'Authorization' => "Bearer ".$this->personal_Access_token,
                 ],
             ]);
-            // var_dump($response->getBody()->getContents());
-            // die;
+            
     
             return $response->getBody()->getContents();
         }
