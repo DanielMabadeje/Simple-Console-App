@@ -15,7 +15,7 @@ class GithubDomain extends Domain implements DomainInterface
     {
 
         unset($params['token']);
-        $this->params=[];
+        $this->params=$params;
         $this->createRequestBag("/user/repos", $token);
         return $this->post();
     }

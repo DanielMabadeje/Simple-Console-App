@@ -1,9 +1,10 @@
 <?php 
 namespace George\ConsoleApp\Domains;
 
-// use GuzzleHttp\Client;
+use GuzzleHttp\Client;
 // guzzlehttp/guzzle
-// use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp;
 
 class Domain
 {
@@ -20,19 +21,18 @@ class Domain
     public function __construct()
     {
         // $this->client = new Client();
-        $this->client = new GuzzleHttp\Client();
-        // $this->client = n();
     }
     
 
     public function get()
     {
+        $client=new Client();
         try{
-            $response = $this->client->request('GET', $this->generateEndpoint(), [
+            $response = $client->request('GET', $this->generateEndpoint(), [
                 'headers' => [
-                    'Accept' => 'application/json',
-                    'Content-Type' => 'application/json',
-                    'authorization' => $this->personal_Access_token,
+                    'Accept' => 'application/vnd.github+json',
+                    'Content-Type' => "application/x-www-form-urlencoded",
+                    'Authorization' => "Bearer ".$this->personal_Access_token,
                 ],
             ]);
     
@@ -46,20 +46,26 @@ class Domain
 
     public function post()
     {
+
+        // var_dump($this->params);
+        // die;
+        $client=new Client();
         try{
-            $response = $this->client->request('POST', $this->generateEndpoint(), [
-                'body' => $this->params,
+            $response = $client->request('POST', $this->generateEndpoint(), [
+                'body' => json_encode($this->params),
                 'headers' => [
                     'Accept' => 'application/vnd.github+json',
-                    'Content-Type' => 'application/json',
-                    'authorization' => $this->personal_Access_token,
+                    'Content-Type' => "application/x-www-form-urlencoded",
+                    'Authorization' => "Bearer ".$this->personal_Access_token,
                 ],
             ]);
+            // var_dump($response->getBody()->getContents());
+            // die;
     
             return $response->getBody()->getContents();
         }
         catch (GuzzleException $e) {
-            return ["status"=>false, "message" => "Unable to Create Account: $e"];
+            return $this->error=["status"=>false, "message" => "Unable to Create Account: $e"];
         }
     }
 
@@ -77,7 +83,5 @@ class Domain
     {
         return $this->route=$route;
     }
-
-    
-    
+  
 }
