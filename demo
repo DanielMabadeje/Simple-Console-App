@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'./vendor/autoload.php';
+
+use George\ConsoleApp\Commands\AddGithubRepositoryCommand;
+use George\ConsoleApp\Commands\GetGithubRepositoryCommand;
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+
+// ... register commands
+$application->add(new AddGithubRepositoryCommand());
+$application->add(new GetGithubRepositoryCommand());
+
+$application->run();

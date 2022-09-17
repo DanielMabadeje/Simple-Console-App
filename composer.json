@@ -1,0 +1,20 @@
+{
+    "name": "george/console-app",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "George\\ConsoleApp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "George"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "symfony/console": "^6.1",
+        "guzzlehttp/guzzle": "^7.5"
+    }
+}
